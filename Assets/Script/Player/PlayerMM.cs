@@ -116,7 +116,7 @@ public class PlayerMM : MonoBehaviour
         // Jump logic
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Add upward velocity
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Add upward velocity
             jumpCount++;
             animator.SetBool("IsJumping", true);
         }
@@ -125,13 +125,13 @@ public class PlayerMM : MonoBehaviour
     private void FixedUpdate()
     {
         // Apply horizontal movement in FixedUpdate for smooth physics
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
 
         // Apply a slight forward force if in air and no horizontal input
         if (jumpCount > 0 && Mathf.Abs(horizontalInput) < 0.01f)
         {
             float forwardMotion = transform.localRotation.y == 0 ? airDrag : -airDrag;
-            rb.velocity = new Vector2(rb.velocity.x + forwardMotion, rb.velocity.y);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x + forwardMotion, rb.linearVelocity.y);
         }
     }
 

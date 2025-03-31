@@ -1,4 +1,0 @@
-repository "Counter@constant00779@cloud"
-  path "/"
-    br "/main"
-    co "/main"
